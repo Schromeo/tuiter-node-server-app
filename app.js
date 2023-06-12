@@ -14,12 +14,14 @@ app.use(session({
 }))
 app.use(cors({
     credentials: true,
-    origin: "http://localhost:3000",
+    origin: process.env.NODE_ENV === 'production' ? 'https://a5--endearing-taffy-7c4b2f.netlify.app/' : "http://localhost:3000",
 }))
 app.use(express.json())
 const port = process.env.PORT || 4000;
+
 TuitsController(app)
 HelloController(app)
 UserController(app)
 AuthController(app)
+
 app.listen(process.env.PORT || 4000)
