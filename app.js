@@ -14,7 +14,7 @@ app.use(session({
 }))
 app.use(cors({
     credentials: true,
-    origin: process.env.NODE_ENV === 'production' ? 'https://a5--endearing-taffy-7c4b2f.netlify.app' : "http://localhost:3000",
+    origin: process.env.NODE_ENV === 'production' ? ['https://a5--endearing-taffy-7c4b2f.netlify.app', 'https://tuiter-node-server-app-8j8n.onrender.com'] : "http://localhost:3000",
 }))
 app.use(express.json())
 const port = process.env.PORT || 4000;
