@@ -24,4 +24,6 @@ HelloController(app)
 UserController(app)
 AuthController(app)
 
-app.listen(process.env.PORT || 4000)
+app.listen(port, () => {
+    console.log(`Server on port ${port}`)
+})
