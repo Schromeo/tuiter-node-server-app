@@ -3,10 +3,10 @@ import * as usersDao from "./users-dao.js"
 //let users = people
 const UserController = (app) => {
     app.get("/api/users", findAllUsers)
-    app.get('/api/users/:uid',findUserById)
+    app.get('/api/users/login', findUserById)
     app.post('/api/users', createUser)
     app.delete('/api/users/:uid',deleteUser)
-    app.put('/api/users/:uid',updateUser)
+    app.put('/api/users', updateUser)
 }
 
 const findAllUsers = async (req, res) => {
@@ -59,10 +59,13 @@ const deleteUser = async (req, res) => {
 //    res.sendStatus(200)
 //}
 const updateUser = async (req, res) => {
-    const id = req.params.id;
-    const status = await usersDao.updateUser(id, req.body);
-    const user = await usersDao.findUserById(id);
-    req.session["currentUser"] = user;
-    res.json(status);
+    console.log("passed to update user: " + req.body, req.body.username, req.body.firstName, req.body.lastName);
+    // const id = req.params.id;
+    const user = await usersDao.updateUser(req.body.username, req.body.firstName, req.body.lastName)
+    if (user) {
+        res.json(user);
+    } else {
+        res.sendStatus(404);
+    }
 };
 export default UserController;
